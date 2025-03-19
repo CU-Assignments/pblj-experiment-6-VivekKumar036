@@ -1,13 +1,14 @@
 #Write a program to sort a list of Employee objects (name, age, salary) using lambda expressions. 
 
 import java.util.*;
+import java.util.stream.*;
 
 class Employee {
     String name;
     int age;
     double salary;
 
-    public Employee(String name, int age, double salary) {
+    Employee(String name, int age, double salary) {
         this.name = name;
         this.age = age;
         this.salary = salary;
@@ -15,29 +16,19 @@ class Employee {
 
     @Override
     public String toString() {
-        return name + ", " + age + ", " + salary;
+        return "Employee{name='" + name + "', age=" + age + ", salary=" + salary + "}";
     }
 }
 
-public class EmployeeSorter {
+public class Main {
     public static void main(String[] args) {
-        List<Employee> employees = Arrays.asList(
-            new Employee("John", 28, 50000),
-            new Employee("Alice", 24, 70000),
-            new Employee("Bob", 30, 60000),
-            new Employee("Charlie", 25, 65000)
-        );
-
-        // Sorting by name
-        employees.sort(Comparator.comparing(e -> e.name));
-        System.out.println("Sorted by Name: " + employees);
-
-        // Sorting by age
-        employees.sort(Comparator.comparingInt(e -> e.age));
-        System.out.println("Sorted by Age: " + employees);
-
-        // Sorting by salary (descending order)
-        employees.sort(Comparator.comparingDouble(e -> -e.salary));
-        System.out.println("Sorted by Salary: " + employees);
+        List<Employee> employees = new ArrayList<>();
+        employees.add(new Employee("Alice", 30, 50000));
+        employees.add(new Employee("Bob", 25, 60000));
+        employees.add(new Employee("Charlie", 35, 70000));
+                                                                 
+        employees.sort((e1, e2) -> e1.name.compareTo(e2.name));      // Sort employees by name using lambda expression
+                                                                
+        employees.forEach(e -> System.out.println(e));                // Print the sorted list using forEach method
     }
 }
